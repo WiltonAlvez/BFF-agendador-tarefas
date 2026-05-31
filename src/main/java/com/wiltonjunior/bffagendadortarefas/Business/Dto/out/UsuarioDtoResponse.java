@@ -1,4 +1,4 @@
-package com.wiltonjunior.bffagendadortarefas.Business.Dto;
+package com.wiltonjunior.bffagendadortarefas.Business.Dto.out;
 
 import lombok.*;
 
@@ -9,12 +9,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UsuarioDTO {
+public class UsuarioDtoResponse {
 
     private Long id;
     private String nome;
     private String email;
     private String senha;
-    private List<EnderecoDTO> enderecos;
-    private List<TelefoneDTO> telefones;
+    private List<EnderecoDtoResponse> enderecos;
+    private List<TelefoneDtoResponse> telefones;
 }

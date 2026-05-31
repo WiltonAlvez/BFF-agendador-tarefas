@@ -1,11 +1,14 @@
 package com.wiltonjunior.bffagendadortarefas.Controller;
 
 
-import com.wiltonjunior.bffagendadortarefas.Business.Dto.TarefasDTO;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.TarefasDtoRequest;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TarefasDtoResponse;
 import com.wiltonjunior.bffagendadortarefas.Business.TarefasService;
 import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnun;
+import com.wiltonjunior.bffagendadortarefas.Infraistructure.Security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,6 +31,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Tarefas", description = "cadastra tarefas de usuarios")
+@SecurityRequirement(name = SecurityConfig.SECURITY_SCHEME)
 public class TarefasController {
 
     private final TarefasService tarefasService;
@@ -36,8 +40,8 @@ public class TarefasController {
     @Operation(summary = "Salvar tarefas", description = "salvar tarefas do usuario")
     @ApiResponse(responseCode = "200", description = "Tarefa salva com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
-    public ResponseEntity<TarefasDTO> gravarTarefa(@RequestBody TarefasDTO dto,
-                                                   @RequestHeader("Authorization") String token) {
+    public ResponseEntity<TarefasDtoResponse> gravarTarefa(@RequestBody TarefasDtoRequest dto,
+                                                           @RequestHeader(value = "Authorization",required = false) String token) {
 
 
         return ResponseEntity.ok(tarefasService.gravarTarefas(token, dto));
@@ -47,11 +51,11 @@ public class TarefasController {
     @Operation(summary = "Buscar Tarefas por periodo", description = "busca tarefas cadastradas por periodo")
     @ApiResponse(responseCode = "200", description = "Tarefa encontrada com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
-    public ResponseEntity<List<TarefasDTO>> buscarListaDeTarefasPorPeriodo(
+    public ResponseEntity<List<TarefasDtoResponse>> buscarListaDeTarefasPorPeriodo(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime dataInicial,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal,
-            @RequestHeader("Authorization") String token) {
+            @RequestHeader(name = "Authorization", required = false) String token) {
 
 
         return ResponseEntity.ok(tarefasService.buscarTarefasPorPeriodo(dataInicial, dataFinal, token));
@@ -61,8 +65,8 @@ public class TarefasController {
     @ApiResponse(responseCode = "200", description = "Tarefa encontrada com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
 
-    public ResponseEntity <List<TarefasDTO>> buscaTarefasPorEmail(@RequestHeader("Authorization")  String token) {
-        List<TarefasDTO> tarefas = tarefasService.buscaTarefasPorEmail(token);
+    public ResponseEntity <List<TarefasDtoResponse>> buscaTarefasPorEmail(@RequestHeader("Authorization")  String token) {
+        List<TarefasDtoResponse> tarefas = tarefasService.buscaTarefasPorEmail(token);
     return ResponseEntity.ok(tarefas);
     }
 
@@ -71,7 +75,7 @@ public class TarefasController {
     @ApiResponse(responseCode = "200", description = "Tarefa deletada com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<Void> deletaTarefaPorID (@RequestParam("id")String id,
-                                                   @RequestHeader("Authorization") String token) {
+                                                   @RequestHeader(name = "Authorization", required = false) String token) {
         tarefasService.deletaTarefaPorID(id, token);
         return ResponseEntity.ok().build();
 
@@ -80,17 +84,17 @@ public class TarefasController {
     @Operation(summary = "Alterar status de Tarefas ", description = "altera status de tarefas cadastradas")
     @ApiResponse(responseCode = "200", description = "status da tarefa alterado com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
-    public ResponseEntity<TarefasDTO> alteraStatusNotificacao(@RequestParam("status") StatusNotificEnun status,
-                                                              @RequestParam ("id") String id,
-                                                              @RequestHeader("Authorization") String token) {
+    public ResponseEntity<TarefasDtoResponse> alteraStatusNotificacao(@RequestParam("status") StatusNotificEnun status,
+                                                                      @RequestParam ("id") String id,
+                                                                      @RequestHeader(name = "Authorization", required = false) String token) {
         return ResponseEntity.ok(tarefasService.alteraStatus(status, id,token ));
     }
     @PutMapping
     @Operation(summary = "Alterar dados de Tarefas ", description = "altera dados de tarefas cadastradas")
     @ApiResponse(responseCode = "200", description = "tarefa alterada com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
-    public ResponseEntity<TarefasDTO> upadateTarefas(@RequestBody TarefasDTO dto, @RequestParam("id") String id,
-                                                     @RequestHeader("Authorization") String token){
+    public ResponseEntity<TarefasDtoResponse> upadateTarefas(@RequestBody TarefasDtoRequest dto, @RequestParam("id") String id,
+                                                             @RequestHeader(name = "Authorization", required = false) String token){
     return ResponseEntity.ok(tarefasService.updateDeTarefas(dto, id, token));
 
     }

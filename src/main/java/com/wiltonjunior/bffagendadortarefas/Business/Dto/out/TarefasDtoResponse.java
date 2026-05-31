@@ -1,4 +1,4 @@
-package com.wiltonjunior.bffagendadortarefas.Business.Dto;
+package com.wiltonjunior.bffagendadortarefas.Business.Dto.out;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnun;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class TarefasDTO {
+public class TarefasDtoResponse {
 
     private String id;
     private String nomeTarefa;

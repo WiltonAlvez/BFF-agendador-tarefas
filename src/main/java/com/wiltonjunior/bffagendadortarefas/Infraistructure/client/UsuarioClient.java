@@ -1,9 +1,13 @@
 package com.wiltonjunior.bffagendadortarefas.Infraistructure.client;
 
 
-import com.wiltonjunior.bffagendadortarefas.Business.Dto.EnderecoDTO;
-import com.wiltonjunior.bffagendadortarefas.Business.Dto.TelefoneDTO;
-import com.wiltonjunior.bffagendadortarefas.Business.Dto.UsuarioDTO;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.EnderecoDtoRequest;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.LoginDtoRequest;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.TelefoneDtoRequest;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.UsuarioDtoRequest;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.EnderecoDtoResponse;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TelefoneDtoResponse;
+import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.UsuarioDtoResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,40 +22,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UsuarioClient {
 
     @GetMapping("/usuario")
-    UsuarioDTO buscaUsuarioEmail(@RequestParam("email") String email,
-                                 @RequestHeader("Authorization") String token);
+    UsuarioDtoResponse buscaUsuarioEmail(@RequestParam("email") String email,
+                                         @RequestHeader("Authorization") String token);
 
 
     @PostMapping
-    UsuarioDTO salvaUsuario(@RequestBody UsuarioDTO usuarioDTO);
+    UsuarioDtoResponse salvaUsuario(@RequestBody UsuarioDtoRequest usuarioDTO);
 
     @PostMapping("/login")
-    String login(@RequestBody UsuarioDTO usuarioDTO);
+    String login(@RequestBody LoginDtoRequest usuarioDTO);
 
     @DeleteMapping("/{email}")
     void deletaUsuarioPorEmail(@PathVariable String email,
-                               @RequestHeader("Authorization") String token);
+                               @RequestHeader(value = "Authorization", required = false) String token);
 
     @PostMapping("/usuario/atualizar")
-    UsuarioDTO atualizaDadosUsuario(@RequestBody UsuarioDTO DTO,
-                                                           @RequestHeader("Authorization") String token);
+    UsuarioDtoResponse atualizaDadosUsuario(@RequestBody UsuarioDtoRequest DTO,
+                                            @RequestHeader(value = "Authorization", required = false) String token);
 
     @PutMapping("/endereco")
-    EnderecoDTO atualizaEndereco(@RequestBody EnderecoDTO dto,
-                                                        @RequestParam("id") Long id,
-                                                        @RequestHeader("Authorization") String token);
+    EnderecoDtoResponse atualizaEndereco(@RequestBody EnderecoDtoRequest dto,
+                                         @RequestParam("id") Long id,
+                                         @RequestHeader(value = "Authorization", required = false) String token);
 
     @PutMapping("/telefone")
-    TelefoneDTO atualizaTelefone(@RequestBody TelefoneDTO dto,
-                                                        @RequestParam("id") Long id,
-                                                        @RequestHeader("Authorization") String token);
+    TelefoneDtoResponse atualizaTelefone(@RequestBody TelefoneDtoRequest dto,
+                                         @RequestParam("id") Long id,
+                                         @RequestHeader(value = "Authorization", required = false) String token);
 
     @PostMapping("/endereco")
-    EnderecoDTO CadastraEndereco(@RequestBody EnderecoDTO dto,
-                                                        @RequestHeader("Authorization") String token);
+    EnderecoDtoResponse CadastraEndereco(@RequestBody EnderecoDtoRequest dto,
+                                         @RequestHeader(value = "Authorization", required = false) String token);
 
     @PostMapping("/telefone")
-    TelefoneDTO CadastraTelefone(@RequestBody TelefoneDTO dto,
-                                                        @RequestHeader("Authorization") String token);
+    TelefoneDtoResponse CadastraTelefone(@RequestBody TelefoneDtoRequest dto,
+                                         @RequestHeader("Authorization") String token);
 
 }
