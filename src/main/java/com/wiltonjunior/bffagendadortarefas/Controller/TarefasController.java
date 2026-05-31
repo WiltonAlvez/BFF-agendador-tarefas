@@ -3,7 +3,7 @@ package com.wiltonjunior.bffagendadortarefas.Controller;
 
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.TarefasDtoRequest;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TarefasDtoResponse;
-import com.wiltonjunior.bffagendadortarefas.Business.TarefasService;
+import com.wiltonjunior.bffagendadortarefas.Service.TarefasService;
 import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnun;
 import com.wiltonjunior.bffagendadortarefas.Infraistructure.Security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;

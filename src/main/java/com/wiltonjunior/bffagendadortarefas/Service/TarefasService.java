@@ -1,4 +1,4 @@
-package com.wiltonjunior.bffagendadortarefas.Business;
+package com.wiltonjunior.bffagendadortarefas.Service;
 
 
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.TarefasDtoRequest;

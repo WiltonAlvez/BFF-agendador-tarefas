@@ -7,7 +7,7 @@ import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.UsuarioDtoRequest;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.EnderecoDtoResponse;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TelefoneDtoResponse;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.UsuarioDtoResponse;
-import com.wiltonjunior.bffagendadortarefas.Business.UsuarioService;
+import com.wiltonjunior.bffagendadortarefas.Service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
