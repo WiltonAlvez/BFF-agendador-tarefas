@@ -1,7 +1,7 @@
 package com.wiltonjunior.bffagendadortarefas.Business.Dto.out;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnun;
+import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class TarefasDtoResponse {
     private String emailUsuario;
     @JsonFormat(shape =  JsonFormat.Shape.STRING, pattern = "dd,MM-yyyy HH:mm:ss")
     private LocalDateTime dataAlteracao;
-    private StatusNotificEnun statusNotificEnun;
+    private StatusNotificEnum statusNotificEnun;
 
 
 

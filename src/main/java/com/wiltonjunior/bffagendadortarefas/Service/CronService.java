@@ -2,7 +2,7 @@ package com.wiltonjunior.bffagendadortarefas.Service;
 
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.LoginDtoRequest;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TarefasDtoResponse;
-import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnun;
+import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -36,7 +36,7 @@ public class CronService {
         List <TarefasDtoResponse> listaDeTarefas = tarefasService.buscarTarefasPorPeriodo(horaFutura, horaFuturMaisCinco,token);
 
         listaDeTarefas.forEach(tarefa -> {emailService.enviaEmail(tarefa);
-        tarefasService.alteraStatus(StatusNotificEnun.NOTIFICADO, tarefa.getId(), token);});
+        tarefasService.alteraStatus(StatusNotificEnum.NOTIFICADO, tarefa.getId(), token);});
     }
 
 

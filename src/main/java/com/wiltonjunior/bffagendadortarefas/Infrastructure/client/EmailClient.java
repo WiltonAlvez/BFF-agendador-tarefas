@@ -1,4 +1,4 @@
-package com.wiltonjunior.bffagendadortarefas.Infraistructure.client;
+package com.wiltonjunior.bffagendadortarefas.Infrastructure.client;
 
 
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TarefasDtoResponse;

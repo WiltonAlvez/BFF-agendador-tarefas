@@ -38,7 +38,7 @@ public class UsuarioController {
     @PostMapping
     @Operation(summary = "Salvar usuarios", description = "cria um novo usuario")
     @ApiResponse(responseCode = "200", description = "Usuario salvo com sucesso")
-    @ApiResponse(responseCode = "400", description = "Usuario já cadastrado")
+    @ApiResponse(responseCode = "409", description = "Usuario já cadastrado")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<UsuarioDtoResponse> salvaUsuario(@RequestBody UsuarioDtoRequest usuarioDTO) {
         return ResponseEntity.ok(usuarioService.salvaUsuario(usuarioDTO));
@@ -58,7 +58,8 @@ public class UsuarioController {
     @GetMapping
     @Operation(summary = "buscar dados dos usuarios por email", description = "buscar dados do usuario")
     @ApiResponse(responseCode = "200", description = "Usuario salvo com sucesso")
-    @ApiResponse(responseCode = "400", description = "Usuario já cadastrado")
+    @ApiResponse(responseCode = "401", description = "Credenciais invalidas")
+    @ApiResponse(responseCode = "409", description = "Usuario já cadastrado")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<UsuarioDtoResponse> buscaUsuarioEmail(@RequestParam("email") String email,
                                                                 @RequestHeader(name = "Authorization", required = false) String token) {
@@ -69,7 +70,8 @@ public class UsuarioController {
     @DeleteMapping("/{email}")
     @Operation(summary = "Deletar usuarios por id ", description = "deleta usuario")
     @ApiResponse(responseCode = "200", description = "Usuario deletado com sucesso")
-    @ApiResponse(responseCode = "404", description = "Usuario não encontrado")
+    @ApiResponse(responseCode = "401", description = "Credenciais invalidas")
+    @ApiResponse(responseCode = "403", description = "Usuario não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<Void> deletaUsuarioPorEmail(@PathVariable String email,
                                                       @RequestHeader(name = "Authorization", required = false) String token) {
@@ -80,7 +82,8 @@ public class UsuarioController {
     @PostMapping("/usuario/atualizar")
     @Operation(summary = "atualizar dados usuarios", description = "atualiza dados do usuario")
     @ApiResponse(responseCode = "200", description = "Usuario atualizado com sucesso ")
-    @ApiResponse(responseCode = "404", description = "Usuario não cadastrado")
+    @ApiResponse(responseCode = "401", description = "Credenciais invalidas")
+    @ApiResponse(responseCode = "403", description = "Usuario não cadastrado")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<UsuarioDtoResponse> atualizaDadosUsuario(@RequestBody UsuarioDtoRequest DTO,
                                                                    @RequestHeader(name = "Authorization", required = false) String token) {
@@ -90,7 +93,8 @@ public class UsuarioController {
     @PutMapping("/endereco")
     @Operation(summary = "atualizar endereços de  usuarios", description = "atualiza endereços usuario")
     @ApiResponse(responseCode = "200", description = "Endereço atualizado com sucesso")
-    @ApiResponse(responseCode = "404", description = "U não cadastrado")
+    @ApiResponse(responseCode = "401", description = "Credenciais invalidas")
+    @ApiResponse(responseCode = "403", description = "Usuário não cadastrado")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<EnderecoDtoResponse> atualizaEndereco(@RequestBody EnderecoDtoRequest dto,
                                                                 @RequestParam("id") Long id,
@@ -102,7 +106,8 @@ public class UsuarioController {
     @Operation(summary = "atualizar telefone dos usuarios",
             description = "atualiza telefones dos usuario")
     @ApiResponse(responseCode = "200", description = "telefone atualizado com sucesso")
-    @ApiResponse(responseCode = "404", description = "Usuario não encontrado")
+    @ApiResponse(responseCode = "401", description = "Credenciais invalidas")
+    @ApiResponse(responseCode = "403", description = "Usuario não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<TelefoneDtoResponse> atualizaTelefone(@RequestBody TelefoneDtoRequest dto,
                                                                 @RequestParam("id") Long id,
@@ -113,7 +118,8 @@ public class UsuarioController {
     @PostMapping("/endereco")
     @Operation(summary = "Salvar Endereços de usuarios", description = "salva endereço de usuario")
     @ApiResponse(responseCode = "200", description = "Endereço salvo com sucesso")
-    @ApiResponse(responseCode = "404", description = "Usuario Não cadastrado")
+    @ApiResponse(responseCode = "401", description = "Credenciais invalidas")
+    @ApiResponse(responseCode = "403", description = "Usuario Não cadastrado")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<EnderecoDtoResponse> CadastraEndereco(@RequestBody EnderecoDtoRequest dto,
                                                                 @RequestHeader(name = "Authorization", required = false) String token) {
@@ -123,7 +129,8 @@ public class UsuarioController {
     @PostMapping("/telefone")
     @Operation(summary = "Salvar Telefones dos usuarios", description = "salva telefone do usuario")
     @ApiResponse(responseCode = "200", description = "Telefone salvo com sucesso")
-    @ApiResponse(responseCode = "400", description = "Usuario não cadastrado")
+    @ApiResponse(responseCode = "401", description = "Credenciais invalidas")
+    @ApiResponse(responseCode = "403", description = "Usuario não cadastrado")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
     public ResponseEntity<TelefoneDtoResponse> CadastraTelefone(@RequestBody TelefoneDtoRequest dto,
                                                                 @RequestHeader(name = "Authorization", required = false) String token) {

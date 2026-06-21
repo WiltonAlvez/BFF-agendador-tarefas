@@ -7,7 +7,7 @@ import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.UsuarioDtoRequest;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.EnderecoDtoResponse;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TelefoneDtoResponse;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.UsuarioDtoResponse;
-import com.wiltonjunior.bffagendadortarefas.Infraistructure.client.UsuarioClient;
+import com.wiltonjunior.bffagendadortarefas.Infrastructure.client.UsuarioClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
