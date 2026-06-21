@@ -1,5 +1,5 @@
 package com.wiltonjunior.bffagendadortarefas.Business.enums;
 
-public enum StatusNotificEnun {
+public enum StatusNotificEnum {
     PENDENTE, NOTIFICADO, CANCELADO
 }

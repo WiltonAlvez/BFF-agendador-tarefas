@@ -1,9 +1,9 @@
-package com.wiltonjunior.bffagendadortarefas.Infraistructure.client;
+package com.wiltonjunior.bffagendadortarefas.Infrastructure.client;
 
 
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.TarefasDtoRequest;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TarefasDtoResponse;
-import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnun;
+import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnum;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,7 +43,7 @@ public interface TarefasClient {
                            @RequestHeader("Authorization") String token);
 
     @PatchMapping
-    TarefasDtoResponse alteraStatusNotificacao(@RequestParam("status") StatusNotificEnun status,
+    TarefasDtoResponse alteraStatusNotificacao(@RequestParam("status") StatusNotificEnum status,
                                                @RequestParam("id") String id,
                                                @RequestHeader("Authorization") String token);
 

@@ -1,10 +1,10 @@
-package com.wiltonjunior.bffagendadortarefas.Business;
+package com.wiltonjunior.bffagendadortarefas.Service;
 
 
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.TarefasDtoRequest;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TarefasDtoResponse;
-import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnun;
-import com.wiltonjunior.bffagendadortarefas.Infraistructure.client.TarefasClient;
+import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnum;
+import com.wiltonjunior.bffagendadortarefas.Infrastructure.client.TarefasClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +38,7 @@ public class TarefasService {
         tarefasClient.deletaTarefaPorID(id, token);
     }
 
-    public TarefasDtoResponse alteraStatus(StatusNotificEnun status, String id, String token) {
+    public TarefasDtoResponse alteraStatus(StatusNotificEnum status, String id, String token) {
         return tarefasClient.alteraStatusNotificacao(status, id, token);
     }
 

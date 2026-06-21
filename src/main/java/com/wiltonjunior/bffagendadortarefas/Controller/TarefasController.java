@@ -3,9 +3,9 @@ package com.wiltonjunior.bffagendadortarefas.Controller;
 
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.in.TarefasDtoRequest;
 import com.wiltonjunior.bffagendadortarefas.Business.Dto.out.TarefasDtoResponse;
-import com.wiltonjunior.bffagendadortarefas.Business.TarefasService;
-import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnun;
-import com.wiltonjunior.bffagendadortarefas.Infraistructure.Security.SecurityConfig;
+import com.wiltonjunior.bffagendadortarefas.Service.TarefasService;
+import com.wiltonjunior.bffagendadortarefas.Business.enums.StatusNotificEnum;
+import com.wiltonjunior.bffagendadortarefas.Infrastructure.Security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -64,6 +64,8 @@ public class TarefasController {
     @Operation(summary = "Buscar Tarefas por email", description = "busca tarefas cadastradas por email")
     @ApiResponse(responseCode = "200", description = "Tarefa encontrada com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
+    @ApiResponse(responseCode = "403", description = "Email não encontrado")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
 
     public ResponseEntity <List<TarefasDtoResponse>> buscaTarefasPorEmail(@RequestHeader("Authorization")  String token) {
         List<TarefasDtoResponse> tarefas = tarefasService.buscaTarefasPorEmail(token);
@@ -74,6 +76,8 @@ public class TarefasController {
     @Operation(summary = "deletar Tarefas por id", description = "deleta tarefas por id")
     @ApiResponse(responseCode = "200", description = "Tarefa deletada com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
+    @ApiResponse(responseCode = "403", description = "Tarefa Id não encontrada")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<Void> deletaTarefaPorID (@RequestParam("id")String id,
                                                    @RequestHeader(name = "Authorization", required = false) String token) {
         tarefasService.deletaTarefaPorID(id, token);
@@ -84,7 +88,9 @@ public class TarefasController {
     @Operation(summary = "Alterar status de Tarefas ", description = "altera status de tarefas cadastradas")
     @ApiResponse(responseCode = "200", description = "status da tarefa alterado com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
-    public ResponseEntity<TarefasDtoResponse> alteraStatusNotificacao(@RequestParam("status") StatusNotificEnun status,
+    @ApiResponse(responseCode = "403", description = "Tarefa Id não encontrada")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
+    public ResponseEntity<TarefasDtoResponse> alteraStatusNotificacao(@RequestParam("status") StatusNotificEnum status,
                                                                       @RequestParam ("id") String id,
                                                                       @RequestHeader(name = "Authorization", required = false) String token) {
         return ResponseEntity.ok(tarefasService.alteraStatus(status, id,token ));
@@ -93,6 +99,8 @@ public class TarefasController {
     @Operation(summary = "Alterar dados de Tarefas ", description = "altera dados de tarefas cadastradas")
     @ApiResponse(responseCode = "200", description = "tarefa alterada com sucesso")
     @ApiResponse(responseCode = "500", description = "Erro no servidor")
+    @ApiResponse(responseCode = "403", description = "Tarefa Id não encontrada")
+    @ApiResponse(responseCode = "401", description = "Usuário não autorizado")
     public ResponseEntity<TarefasDtoResponse> upadateTarefas(@RequestBody TarefasDtoRequest dto, @RequestParam("id") String id,
                                                              @RequestHeader(name = "Authorization", required = false) String token){
     return ResponseEntity.ok(tarefasService.updateDeTarefas(dto, id, token));
